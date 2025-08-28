@@ -1,6 +1,11 @@
 export const cleanInput = (input: string): string[] => {
-  return input.trim()
+  if (input.trim().length === 0) {
+    return []
+  }
+
+  return input
     .replace(/\s+/g, ' ')
+    .trim()
     .split(' ')
     .map(word => word.toLowerCase().trim())
 }

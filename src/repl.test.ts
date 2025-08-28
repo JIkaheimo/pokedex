@@ -3,7 +3,19 @@ import { cleanInput } from './repl'
 
 describe.each([
   {
+    input: '  ',
+    expected: []
+  },
+  {
+    input: '  hello  ',
+    expected: ['hello']
+  },
+  {
     input: '  hello  world  ',
+    expected: ['hello', 'world']
+  },
+  {
+    input: '  HellO  World  ',
     expected: ['hello', 'world']
   }
 ])('cleanInput($input)', ({ input, expected }) => {
