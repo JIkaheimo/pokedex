@@ -2,8 +2,9 @@ import * as _ from 'lodash-es'
 import { createInterface } from 'node:readline'
 import { getCommands } from './commands/index.js'
 import type { CLICommand } from './commands/types.js'
+import type { State } from './state.js'
 
-export const startREPL = (): void => {
+export const startREPL = (state: State): void => {
   const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
