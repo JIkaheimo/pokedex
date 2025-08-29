@@ -1,22 +1,30 @@
 import { createInterface } from 'node:readline'
 
 export const startREPL = (): void => {
-  // PLACEHOLDER
-  createInterface({
+  const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: 'Pokedex > '
+    prompt: 'pokedex > '
+  })
+
+  rl.prompt()
+
+  rl.on('line', (input) => {
+    const words = cleanInput(input)
+    if (words.length === 0) {
+      rl.prompt()
+      return
+    }
+
+    const commandName = words[0]
+    console.log(`Your command was: ${commandName}`)
+    rl.prompt()
   })
 }
 
-export const cleanInput = (input: string): string[] => {
-  if (input.trim().length === 0) {
-    return []
-  }
-
-  return input
-    .replace(/\s+/g, ' ')
+export const cleanInput = (input: string): string[] =>
+  input
+    .toLowerCase()
     .trim()
     .split(' ')
-    .map(word => word.toLowerCase().trim())
-}
+    .filter((word) => word !== '')
