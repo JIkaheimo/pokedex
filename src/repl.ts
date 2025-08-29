@@ -1,4 +1,6 @@
+import * as _ from 'lodash-es'
 import { createInterface } from 'node:readline'
+import { type CLICommand, getCommands } from './commands/index.js'
 
 export const startREPL = (): void => {
   const rl = createInterface({
@@ -11,13 +13,23 @@ export const startREPL = (): void => {
 
   rl.on('line', (input) => {
     const words = cleanInput(input)
+
     if (words.length === 0) {
       rl.prompt()
       return
     }
 
     const commandName = words[0]
-    console.log(`Your command was: ${commandName}`)
+
+    const commands = getCommands()
+    const command = _.get(commands, commandName) as CLICommand | undefined
+
+    if (command != null) {
+      command.callback(commands)
+    } else {
+      console.log(`Unknown command: ${commandName}`)
+    }
+
     rl.prompt()
   })
 }
