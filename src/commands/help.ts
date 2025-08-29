@@ -1,7 +1,7 @@
 import type { CLICommand } from './types'
 
 export const helpCommand: CLICommand['callback'] = (commands) => {
-  console.log('Welcome to the Pokedex CLI!')
+  console.log('Welcome to the Pokedex!')
   console.log('Usage:\n')
   for (const command of Object.values(commands)) {
     console.log(`  ${command.name}: ${command.description}`)
