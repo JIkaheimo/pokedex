@@ -1,6 +1,7 @@
 import * as _ from 'lodash-es'
 import { createInterface } from 'node:readline'
-import { type CLICommand, getCommands } from './commands/index.js'
+import { getCommands } from './commands/index.js'
+import type { CLICommand } from './commands/types.js'
 
 export const startREPL = (): void => {
   const rl = createInterface({

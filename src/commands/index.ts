@@ -1,19 +1,18 @@
 import { exitCommand } from './exit.js'
+import { helpCommand } from './help.js'
+import type { CommandRegistry } from './types.js'
 
-export interface CLICommand {
-  readonly name: string
-  readonly description: string
-  readonly callback: (commands: CommandRegistry) => void
-}
-
-const commandRegistry = {
+const commandRegistry: CommandRegistry = {
   exit: {
     name: 'exit',
     description: 'Exits the Pokedex',
     callback: exitCommand
+  },
+  help: {
+    name: 'help',
+    description: 'Displays help information',
+    callback: helpCommand
   }
-} as const
-
-export type CommandRegistry = typeof commandRegistry
+}
 
 export const getCommands = (): CommandRegistry => commandRegistry
